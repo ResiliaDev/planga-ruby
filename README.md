@@ -11,7 +11,7 @@ Planga Ruby Wrapper:
 ```ruby
 require 'planga'
 
-conf = PlangaConfiguration.new(
+planga = Planga.new(
         :public_api_id => "foobar",
         :private_api_key => "ePxoM3OTkW1z6j84JDurqw",
         :conversation_id => "general",
@@ -20,7 +20,7 @@ conf = PlangaConfiguration.new(
         :container_id => "my_container_div"
     )
 
-snippet = Planga.get_planga_snippet(conf)
+snippet = planga.chat_snippet()
 ```
 
 **Requirements:**

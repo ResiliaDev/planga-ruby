@@ -3,42 +3,10 @@ require 'jose'
 require 'json'
 
 class Planga
-    def self.get_planga_snippet(configuration)
-        return %{
-            <script type=\"text/javascript\" src=\"#{configuration.remote_host}/js/js_snippet.js\"></script>
-            <div id=\"#{configuration.container_id}\"></div>
-            <script type=\"text/javascript\">
-               new Planga(document.getElementById(\"#{configuration.container_id}\"), \{
-                   public_api_id: \"#{configuration.public_api_id}\",
-                   encrypted_options: \"#{Planga.encrypt_options(configuration)}\",
-                   socket_location: \"#{configuration.remote_host}/socket\",
-               \});
-            </script>
-        }
-    end
-    
-    private
-    def self.encrypt_options(configuration)
-        key = JOSE::JWK.from({"k" => configuration.private_api_key, "kty" => "oct"})
-
-        payload = {
-                "conversation_id": configuration.conversation_id,
-                "current_user_id": configuration.current_user_id,
-                "current_user_name": configuration.current_user_name
-            }
-
-        return JOSE::JWE.block_encrypt(
-                key, 
-                payload.to_json, 
-                { "alg" => "A128GCMKW", "enc" => "A128GCM" }
-            ).compact
-    end
-end
-
-class PlangaConfiguration
     attr_accessor :public_api_id, :private_api_key, :conversation_id,
         :current_user_id, :current_user_name, :container_id, :remote_host
 
+    
     def initialize(**conf)
         @public_api_id = conf[:public_api_id]
         @private_api_key = conf[:private_api_key]
@@ -51,5 +19,38 @@ class PlangaConfiguration
         if not container_id
             @container_id = "planga-chat-" + SecureRandom.hex
         end
+    end
+    
+
+    def chat_snippet
+        return %{
+            <script type=\"text/javascript\" src=\"#{self.remote_host}/js/js_snippet.js\"></script>
+            <div id=\"#{self.container_id}\"></div>
+            <script type=\"text/javascript\">
+               new Planga(document.getElementById(\"#{self.container_id}\"), \{
+                   public_api_id: \"#{self.public_api_id}\",
+                   encrypted_options: \"#{encrypt_options()}\",
+                   socket_location: \"#{self.remote_host}/socket\",
+               \});
+            </script>
+        }
+    end
+    
+
+    private
+    def encrypt_options
+        key = JOSE::JWK.from({"k" => self.private_api_key, "kty" => "oct"})
+
+        payload = {
+                "conversation_id": self.conversation_id,
+                "current_user_id": self.current_user_id,
+                "current_user_name": self.current_user_name
+            }
+
+        return JOSE::JWE.block_encrypt(
+                key, 
+                payload.to_json, 
+                { "alg" => "A128GCMKW", "enc" => "A128GCM" }
+            ).compact
     end
 end

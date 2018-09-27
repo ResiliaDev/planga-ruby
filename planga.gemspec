@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name         = 'planga'
-  s.version      = '0.0.2'
+  s.version      = '0.0.4'
   s.date         = '2018-09-13'
   s.summary      = "Planga"
   s.description  = "Wrapper for interacting with the Planga chat server."
@@ -10,5 +10,5 @@ Gem::Specification.new do |s|
   s.homepage     = 'https://github.com/ResiliaDev/Planga'
   s.license      = 'MIT'
 
-  s.add_dependency('jose', '~> 0')
+  s.add_dependency('jose', '~> 1.1')
 end

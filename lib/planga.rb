@@ -14,7 +14,7 @@ class Planga
         @current_user_id = conf[:current_user_id]
         @current_user_name = conf[:current_user_name]
         @container_id = conf[:container_id]
-        @remote_host = conf[:remote_host] || "//planga.def"
+        @remote_host = conf[:remote_host] || "//chat.planga.io"
 
         if not container_id
             @container_id = "planga-chat-" + SecureRandom.hex

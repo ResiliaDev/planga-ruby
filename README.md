@@ -1,19 +1,10 @@
 Planga Ruby Wrapper:
 ====================
 
-**requirements:**
+[![Planga](https://img.shields.io/badge/%F0%9F%98%8E%20planga-chat-ff00ff.svg)](http://www.planga.io/)
+[![Planga Docs](https://img.shields.io/badge/planga-docs-lightgrey.svg)](http://www.planga.io/docs)
+[![Gem](https://img.shields.io/gem/v/planga.svg)](https://rubygems.org/gems/planga)
 
-* Ruby >= 2.4.1
-* gem
-
-**Build and Deploy new gem:**
-
-* run `gem build planga.gemspec`
-* run `gem push planga-n.n.n.gem`
-
-**Installing the new gem:**
-
-* run `gem install planga`
 
 **Example usage**
 
@@ -31,3 +22,18 @@ conf = PlangaConfiguration.new(
 
 snippet = Planga.get_planga_snippet(conf)
 ```
+
+**Requirements:**
+
+* Ruby >= 2.4.1
+* gem
+
+**Build and Deploy new gem:**
+
+* run `gem build planga.gemspec`
+* run `gem push planga-n.n.n.gem`
+
+**Installing the new gem:**
+
+* run `gem install planga`
+

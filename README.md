@@ -5,6 +5,15 @@ Planga Ruby Wrapper:
 [![Planga Docs](https://img.shields.io/badge/planga-docs-lightgrey.svg)](http://www.planga.io/docs)
 [![Gem](https://img.shields.io/gem/v/planga.svg)](https://rubygems.org/gems/planga)
 
+**Installation**
+
+Global installation:
+`gem install planga`
+or, for installation in a single project, add
+```
+gem 'planga', '~> 0.0.3'
+```
+to your Gemfile.
 
 **Example usage**
 
@@ -26,14 +35,9 @@ snippet = planga.chat_snippet()
 **Requirements:**
 
 * Ruby >= 2.4.1
-* gem
+* The Planga gem
 
-**Build and Deploy new gem:**
+**Steps to build and Deploy a new version of the gem:**
 
 * run `gem build planga.gemspec`
 * run `gem push planga-n.n.n.gem`
-
-**Installing the new gem:**
-
-* run `gem install planga`
-

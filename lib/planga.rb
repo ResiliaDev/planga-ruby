@@ -17,18 +17,18 @@ class Planga
     # * public_api_id: The public API ID that can be found in the Planga Dashboard.
     # * private_api_key: The private API key that can be found in the Planga Dashboard.
     # * conversation_id: The identifier that uniquely identifies the single conversation
-    #     that the user can connect with in this chat. Examples would be "general", "product/1234" or "private/123/543".
+    # that the user can connect with in this chat. Examples would be "general", "product/1234" or "private/123/543".
     # * current_user_id: The internal ID your application uses, which uniquely identifies
-    #     the user currently using your application.
+    # the user currently using your application.
     # * current_user_name: The name of this user. This name is shown in the chat interface
-    #     next to the typed messages
+    # next to the typed messages
     #
     # Optional are:
     # 
     # * remote_host: This can point to another host, if you are hosting your own instance of Planga.
-    #     It defaults to the URL of Planga's main chat server. (`//chat.planga.io`)
-    # * container_id: If you want a custom HTML ID attribute specified to the created HTML element, 
-    #    you can enter it here.
+    # It defaults to the URL of Planga's main chat server. (`//chat.planga.io`)
+    # * container_id: If you want a custom HTML ID attribute specified to the created HTML element,
+    # you can enter it here.
     # * debug: (defaults to `false`).
     #
     def initialize(**conf)

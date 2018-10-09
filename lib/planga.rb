@@ -6,10 +6,6 @@ require 'json'
 # if included in a webpage, lets the visitor of that webpage
 # connect with the Planga Chat Server and start chatting.
 class Planga
-    attr_accessor :public_api_id, :private_api_key, :conversation_id,
-        :current_user_id, :current_user_name, :container_id, :remote_host, :debug
-
-    
     # The following configuration options are available:
     #
     # Required are:
@@ -24,7 +20,7 @@ class Planga
     # next to the typed messages
     #
     # Optional are:
-    # 
+    #
     # * remote_host: This can point to another host, if you are hosting your own instance of Planga.
     # It defaults to the URL of Planga's main chat server. (`//chat.planga.io`)
     # * container_id: If you want a custom HTML ID attribute specified to the created HTML element,
@@ -37,50 +33,59 @@ class Planga
         @conversation_id = conf[:conversation_id]
         @current_user_id = conf[:current_user_id]
         @current_user_name = conf[:current_user_name]
-        @container_id = conf[:container_id]
-        @remote_host = conf[:remote_host] || "//chat.planga.io"
-	@debug = conf[:debug] || false
 
-        if not container_id
-            @container_id = "planga-chat-" + SecureRandom.hex
-        end
+        @remote_host = conf[:remote_host]
+        @remote_host ||= "//chat.planga.io"
+
+        @container_id = conf[:container_id]
+        @container_id ||= "planga-chat-" + SecureRandom.hex
+
+	      @debug = conf[:debug] || false
     end
-    
+
 
     # Creates a full-fledged HTML snippet that includes Planga in your page.
     def chat_snippet
-        return %{
-            <script type=\"text/javascript\" src=\"#{self.remote_host}/js/js_snippet.js\"></script>
-            <div id=\"#{self.container_id}\"></div>
-            <script type=\"text/javascript\">
-               new Planga(document.getElementById(\"#{self.container_id}\"), \{
-                   public_api_id: \"#{self.public_api_id}\",
-                   encrypted_options: \"#{encrypted_options()}\",
-                   socket_location: \"#{self.remote_host}/socket\",
-                   debug: #{self.debug},
+        <<-SNIPPET
+            <script type="text/javascript" src="#{@remote_host}/js/js_snippet.js"></script>
+            <div id="#{@container_id}"></div>
+            <script type="text/javascript">
+               new Planga(document.getElementById("#{@container_id}"), \{
+                   public_api_id: "#{@public_api_id}",
+                   encrypted_options: "#{encrypted_options()}",
+                   socket_location: "#{@remote_host}/socket",
+                   debug: #{@debug},
                \});
             </script>
-        }
+        SNIPPET
     end
-    
+
 
     # Returns the encrypted configuration.
     #
     # This function is useful if (and only if) you do not want to use the normal chat snippet,
     # but want to completely customize how Planga loads (so you want to create it manually).
     def encrypted_options
-        key = JOSE::JWK.from({"k" => self.private_api_key, "kty" => "oct"})
+        encrypt(construct_encrypted_options())
+    end
 
-        payload = {
-                "conversation_id": self.conversation_id,
-                "current_user_id": self.current_user_id,
-                "current_user_name": self.current_user_name
-            }
+    private def construct_encrypted_options
+      {
+        "conversation_id": @conversation_id,
+        "current_user_id": @current_user_id,
+        "current_user_name": @current_user_name
+      }.to_json
+    end
 
-        return JOSE::JWE.block_encrypt(
-                key, 
-                payload.to_json, 
-                { "alg" => "A128GCMKW", "enc" => "A128GCM" }
-            ).compact
+    private def encrypt(payload)
+      JOSE::JWE.block_encrypt(
+        unwrapped_key,
+        payload,
+        { "alg" => "A128GCMKW", "enc" => "A128GCM" }
+      ).compact
+    end
+
+    private def unwrapped_key()
+      JOSE::JWK.from({"k" => @private_api_key, "kty" => "oct"})
     end
 end

@@ -21,23 +21,34 @@ to your Gemfile.
 require 'planga'
 
 planga = Planga.new(
-        :public_api_id => "foobar",
+        # These stay the same for all chats:
+        :public_api_id => "b5fc4092f05c70445fb758caac5027ca",
         :private_api_key => "ePxoM3OTkW1z6j84JDurqw",
+        # These change based on the current user:
         :conversation_id => "general",
         :current_user_id => "1234",
         :current_user_name => "Bob",
-        :container_id => "my_container_div"
     )
 
 snippet = planga.chat_snippet()
 ```
+
+For more information on what the different fields mean, see the [main Planga.io documentation](https://planga.io/docs) (until more detailed Ruby-specific documentation has been written).
+
+For a guide that goes into a little bit more details, see [Building Live Chat Between Users in a Rails application using Planga.io](https://medium.com/@renevanpelt/building-live-chat-between-users-in-a-rails-application-91bc3a33b545)
+
 
 **Requirements:**
 
 * Ruby >= 2.4.1
 * The Planga gem
 
+
+
 **Steps to build and Deploy a new version of the gem:**
+
+_(This is only interesting if you want to make a fork of this Gem)_
+
 
 * run `gem build planga.gemspec`
 * run `gem push planga-n.n.n.gem`

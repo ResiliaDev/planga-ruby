@@ -11,7 +11,7 @@ Global installation:
 `gem install planga`
 or, for installation in a single project, add
 ```
-gem 'planga', '~> 0.0.4'
+gem 'planga', '~> 0.5.0'
 ```
 to your Gemfile.
 

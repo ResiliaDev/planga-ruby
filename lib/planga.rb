@@ -46,33 +46,37 @@ class Planga
         @container_id ||= "planga-chat-" + SecureRandom.hex
 
         @include_style = conf[:include_style]
-        @include_style ||= "#{remote_host}/css/chat-style-basic.css"
+        if @include_style == nil
+          @include_style = "#{remote_host}/css/chat-style-basic.css"
+        end
 	      @debug = conf[:debug] || false
     end
 
 
     # Creates a full-fledged HTML snippet that includes Planga in your page.
     def chat_snippet
-        <<-SNIPPET
-            #{style_tag()}
-            <script type="text/javascript" src="#{@remote_host}/js/js_snippet.js"></script>
-            <div id="#{@container_id}"></div>
-            <script type="text/javascript">
-               new Planga(document.getElementById("#{@container_id}"), \{
-                   public_api_id: "#{@public_api_id}",
-                   encrypted_options: "#{encrypted_options()}",
-                   socket_location: "#{@remote_host}/socket",
-                   debug: #{@debug},
-               \});
-            </script>
+        snippet = <<-SNIPPET
+#{style_tag()}
+<script type="text/javascript" src="#{@remote_host}/js/js_snippet.js"></script>
+<div id="#{@container_id}"></div>
+<script type="text/javascript">
+    new Planga(document.getElementById("#{@container_id}"), \{
+        public_api_id: "#{@public_api_id}",
+        encrypted_options: "#{encrypted_options()}",
+        socket_location: "#{@remote_host}/socket",
+        debug: #{@debug},
+    \});
+</script>
         SNIPPET
+
+        snippet.strip!
     end
 
     def style_tag()
-     "" unless @include_style
+     return "" unless @include_style
 
      <<-SNIPPET
-     <link rel="#{include_style}">"
+     <link rel="#{include_style}" />
      SNIPPET
     end
 

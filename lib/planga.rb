@@ -6,6 +6,7 @@ require 'json'
 # if included in a webpage, lets the visitor of that webpage
 # connect with the Planga Chat Server and start chatting.
 class Planga
+  attr_reader :public_api_id, :conversation_id, :current_user_id, :current_user_name, :remote_host, :container_id, :include_style, :debug
     # The following configuration options are available:
     #
     # Required are:

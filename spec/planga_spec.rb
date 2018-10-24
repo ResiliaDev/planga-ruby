@@ -150,11 +150,22 @@ RSpec.describe Planga, "#chat_snippet" do
 end
 
 RSpec.describe Planga, "#encrypted_options" do
+  before(:each) do
+    blob = Planga.new(**valid_planga_config).encrypted_options
+    unwrapped_key = JOSE::JWK.from({"k" => valid_planga_config[:private_api_key], "kty" => "oct"})
+    res = JOSE::JWE.block_decrypt(unwrapped_key, blob).first
+    @json = JSON.parse(res)
+  end
   it "is a valid JWE-encrypted blob that can be decrypted" do
-
+    expect(@json.keys.sort).to eq ["conversation_id", "current_user_id", "current_user_name"].sort
   end
 
   it "will give the same options when decrypted that were passed in" do
+    expected = { "conversation_id" => valid_planga_config[:conversation_id],
+      "current_user_id" => valid_planga_config[:current_user_id],
+      "current_user_name" => valid_planga_config[:current_user_name],
+    }
 
+    expect(@json).to eq expected
   end
 end

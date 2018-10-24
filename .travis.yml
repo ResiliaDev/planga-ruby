@@ -1,0 +1,14 @@
+language: ruby
+rvm:
+- 2.2
+- 2.3
+- 2.4
+- 2.5
+deploy:
+  provider: rubygems
+  api_key:
+    secure: YRjDL3FpwsCN+YmDDEOxid3v1ftoj9eiHYK9EJ6q3ipCGjEu5Eka0IIDR31V2UGwuYE4LOa5em64PAShOW+B2HysjCvVC7iJVQbnq04zTQRzKevVCjppC7jn1+f/okCxBFERxIL0HR8XsK0gbiMw4oHaLek/daeIKZkWD5faGVpvPJiHvqGDFAlnR26SZZr4Xou2zPbWi44w7m53W2FFqnb+Fgl0ksNN328Nf7CNvdGNEgxHYmjD2ZhwlDYolHFAgwR1ii8TETM78I917E26A8AAnCyqj3lebx3X3y67e7/6qSfNyJYmH+oMJ3aOOHhOquloTNZ1aGi94VYv7lCOsHmPE0UBEzu+IRD/u5dVMh1YqM0m0grhC3n/ds7Rj+PbMB4UpsNkhBOF0Zvw6HyHoXpnnYzuNZpL7RRozALcb3Lrm2zyXEZNsrZYmd2KIHDGkB4DkFCfNlcvALEpFm+SIXDK3chZRXiau59TCRaxqArQpqwEnNPDvJ790p/vEPRpF4shmQfMXA5dJF02g+ReTpJ6yU0CUGUIBZcaiQ2Rkygs1fq4297GhPnlmIfK3gq+QEN7QdgX1ZzNzgeBrR4nx0XsnOTkTHvPuxtPikd6qeMzEBWx7HwYGmVurN6RP9cai+hUomwxTZWyLIi66uU9wUfmI5q88/42wCmrqNFFLyA=
+  gem: y
+  on:
+    tags: true
+    repo: ResiliaDev/planga-ruby

@@ -50,6 +50,7 @@ For a guide that goes into a little bit more details, see [Building Live Chat Be
 
 _(This is only interesting if you want to make a fork of this Gem)_
 
+**NOTE:** We've set up Travis-CI to build a new version of the official gem whenever a tagged commit is made
 
 * run `gem build planga.gemspec`
 * run `gem push planga-n.n.n.gem`

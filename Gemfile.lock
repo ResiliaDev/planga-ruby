@@ -45,6 +45,7 @@ GEM
       mini_portile2 (~> 2.3.0)
     parallel (1.12.1)
     public_suffix (3.0.3)
+    rake (12.3.1)
     rspec (3.8.0)
       rspec-core (~> 3.8.0)
       rspec-expectations (~> 3.8.0)
@@ -78,6 +79,7 @@ DEPENDENCIES
   html_validation (~> 1.1.5)
   nokogiri (~> 1.8, >= 1.8.5)
   planga!
+  rake (~> 12.3, >= 12.3.1)
   rspec (~> 3.8)
   simplecov (~> 0.16.1)
 

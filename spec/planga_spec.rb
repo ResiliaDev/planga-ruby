@@ -95,10 +95,8 @@ end
 RSpec.describe Planga, "#chat_snippet" do
   it "emits valid HTML" do
     snippet = Planga.new(valid_planga_config).chat_snippet
-    doc = Nokogiri::HTML.fragment(snippet) { |config| config.strict }
-    skip("Find out how to get Nokogiri to reject tags that do not close, or unknown HTML tags.")
-
-    expect(doc).to not_be
+    doc = Nokogiri::HTML.fragment(snippet)
+    expect(doc.errors).to be_empty
   end
 
   it "has two script tags and a container div" do

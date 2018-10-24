@@ -25,6 +25,10 @@ class Planga
     # It defaults to the URL of Planga's main chat server. (`//chat.planga.io`)
     # * container_id: If you want a custom HTML ID attribute specified to the created HTML element,
     # you can enter it here.
+    # * include_style: Can be the location of a custom stylesheet to include,
+    # or `false` if you do not want to include your own style
+    # (and do this manually somewhere else in the page).
+    # (Defaults to "#{remote_host}/css/chat-style-basic.css")
     # * debug: (defaults to `false`).
     #
     def initialize(**conf)
@@ -40,6 +44,8 @@ class Planga
         @container_id = conf[:container_id]
         @container_id ||= "planga-chat-" + SecureRandom.hex
 
+        @include_style = conf[:include_style]
+        @include_style ||= "#{remote_host}/css/chat-style-basic.css"
 	      @debug = conf[:debug] || false
     end
 
@@ -47,6 +53,7 @@ class Planga
     # Creates a full-fledged HTML snippet that includes Planga in your page.
     def chat_snippet
         <<-SNIPPET
+            #{style_tag()}
             <script type="text/javascript" src="#{@remote_host}/js/js_snippet.js"></script>
             <div id="#{@container_id}"></div>
             <script type="text/javascript">
@@ -58,6 +65,14 @@ class Planga
                \});
             </script>
         SNIPPET
+    end
+
+    def style_tag()
+     "" unless @include_style
+
+     <<-SNIPPET
+     <link rel="#{include_style}">"
+     SNIPPET
     end
 
 

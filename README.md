@@ -5,6 +5,7 @@ Planga Ruby Wrapper:
 [![Planga Docs](https://img.shields.io/badge/planga-docs-lightgrey.svg)](http://www.planga.io/docs)
 [![Gem](https://img.shields.io/gem/v/planga.svg)](https://rubygems.org/gems/planga)
 [RubyDoc](https://www.rubydoc.info/github/ResiliaDev/planga-ruby/master)
+[![Build Status](https://travis-ci.org/ResiliaDev/planga-ruby.svg?branch=master)](https://travis-ci.org/ResiliaDev/planga-ruby)
 
 **Installation**
 

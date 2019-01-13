@@ -38,6 +38,7 @@ class Planga
         @conversation_id = conf[:conversation_id]
         @current_user_id = conf[:current_user_id]
         @current_user_name = conf[:current_user_name]
+        @current_user_name = conf[:current_user_role]
 
         @remote_host = conf[:remote_host]
         @remote_host ||= "//chat.planga.io"
@@ -93,7 +94,8 @@ class Planga
       {
         "conversation_id": @conversation_id,
         "current_user_id": @current_user_id,
-        "current_user_name": @current_user_name
+        "current_user_name": @current_user_name,
+        "current_user_role": @current_user_role,
       }.to_json
     end
 

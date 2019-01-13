@@ -155,13 +155,14 @@ RSpec.describe Planga, "#encrypted_options" do
     @json = JSON.parse(res)
   end
   it "is a valid JWE-encrypted blob that can be decrypted" do
-    expect(@json.keys.sort).to eq ["conversation_id", "current_user_id", "current_user_name"].sort
+    expect(@json.keys.sort).to eq ["conversation_id", "current_user_id", "current_user_name", "current_user_role"].sort
   end
 
   it "will give the same options when decrypted that were passed in" do
     expected = { "conversation_id" => valid_planga_config[:conversation_id],
       "current_user_id" => valid_planga_config[:current_user_id],
       "current_user_name" => valid_planga_config[:current_user_name],
+      "current_user_role" => valid_planga_config[:current_user_role],
     }
 
     expect(@json).to eq expected

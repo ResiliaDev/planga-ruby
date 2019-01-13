@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name         = 'planga'
-  s.version      = '0.7.0'
+  s.version      = '0.8.0'
   s.date         = '2018-10-09'
   s.summary      = "Ruby Wrapper for the Planga Chat Service"
   s.description  = "Ruby Wrapper for interacting with the Planga Chat Service."

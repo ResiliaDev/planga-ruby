@@ -1,3 +1,4 @@
+- 0.8.0: Added option to allow current_user_role to be given in config.
 - 0.7.0: Added option `include_style` to include a default stylesheet. Written proper tests
 - 0.6.0: Removed superfluous accessor methods. Lots of internal refactoring with no outside changes.
 - 0.5.0: More sensible version naming, documentation, support for the `debug` option and an improved Gemspec.

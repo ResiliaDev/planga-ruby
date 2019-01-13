@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    planga (0.7.0)
+    planga (0.8.1)
       jose (~> 1.1)
 
 GEM
